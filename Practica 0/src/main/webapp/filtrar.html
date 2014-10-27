@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Task</title>
+</head>
+<body>
+	<p>
+	<h1>Ha elegido filtrar tareas!</h1>
+	<p>
+	<fieldset>
+		<legend><h2>Rellene los siguientes campos:</h2></legend>
+		<h3>En blanco se asumira como que no se debe mirar dicho campo</h3>
+		<form method="post" action="Filtrar">
+			<table>
+				<tr>
+					<td>Nombre de la tarea:</td>
+					<td><input type=text name=nom></td>
+				</tr>
+				<tr>
+					<td>Contexto:</td>
+					<td><input type=text name=context></td>
+				</tr>
+				<tr>
+					<td>Proyecto:</td>
+					<td><input type=text name=pro></td>
+				</tr>
+				<tr>
+					<td>Prioridad:</td>
+					<td><input type=number name=prior></td>
+				</tr>
+			</table>
+			<input type="submit" value="Aceptar">
+		</form>
+	</fieldset>
+</body>
+</html>
