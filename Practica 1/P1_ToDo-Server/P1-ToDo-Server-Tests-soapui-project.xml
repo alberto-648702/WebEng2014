@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+   <S:Body>
+      <ns2:removeTaskResponse xmlns:ns2="http://server.bigws/">
+         <return>Task not found</return>
+      </ns2:removeTaskResponse>
+   </S:Body>
+</S:Envelope>
