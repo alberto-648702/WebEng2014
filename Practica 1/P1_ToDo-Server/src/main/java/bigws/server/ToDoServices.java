@@ -19,38 +19,28 @@ import formats.json.TaskList;
 public class ToDoServices {
 
 	private final static String DEFAULT_FILE_NAME = "ToDoList.json";
-
+	
 	@WebMethod()
-	public String addTask(String name, String context, String project,
-			int priority) {
+	public String addTask(Task task) {
 		String filename = DEFAULT_FILE_NAME;
 		String estado = "Task successfully added";
 		Gson gson = new Gson();
 		TaskList taskList = new TaskList();
-
+		
+		taskList.addTask(new Task());
+		
 		try {
 			taskList = gson.fromJson(new FileReader(filename), TaskList.class);
 		} catch (JsonSyntaxException | JsonIOException e1) {
 			estado = "Something has gone wrong";
 			e1.printStackTrace();
 		} catch (FileNotFoundException e) {
-
+			
 		}
-
-		// Create and fill a new task
-		Task task = new Task();
-		if (taskList.getLast() == null)
-			task.setId(1);
-		else
-			task.setId(taskList.getLast().getId() + 1);
-		task.setName(name);
-		task.setContext(context);
-		task.setProject(project);
-		task.setPriority(priority);
 
 		// Add an address.
 		taskList.addTask(task);
-
+		
 		// Write the new address book back to disk.
 		FileWriter output;
 		try {
@@ -105,36 +95,21 @@ public class ToDoServices {
 	}
 
 	@WebMethod()
-	public String listTasks() {
+	public TaskList listTasks() {
 		Gson gson = new Gson();
 		String filename = DEFAULT_FILE_NAME;
-		String lista = "";
 		TaskList taskList = null;
-
 		try {
 			taskList = gson.fromJson(new FileReader(filename), TaskList.class);
-			if (taskList != null && !taskList.isEmpty()) {
-				for (Task task : taskList.getTaskList()) {
-					lista = lista + "\n<br><br>\nNº: " + task.getId()
-							+ "\n<br>Task: " + task.getName()
-							+ "\n<br>Context: " + task.getContext()
-							+ "\n<br>Project: " + task.getProject()
-							+ "\n<br>Priority: " + task.getPriority();
-				}
-			} else
-				lista = "";
 
 		} catch (JsonSyntaxException e) {
-			lista = "Something has gone wrong";
 			e.printStackTrace();
 		} catch (JsonIOException e) {
-			lista = "Something has gone wrong";
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			lista = "Something has gone wrong";
-			e.printStackTrace();
+			removeAll();
 		}
-		return lista;
+		return taskList;
 	}
 
 	@WebMethod

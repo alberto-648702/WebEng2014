@@ -1,8 +1,10 @@
 package formats.json;
 
 public class Task {
-	public String name, context, project;
-	public int priority, id;
+	
+	private String name, context, project;
+	private int priority, id;
+	
 	
 	public int getId() {
 		return id;

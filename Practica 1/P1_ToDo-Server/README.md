@@ -13,4 +13,4 @@ Folder webapp has an index.html that show three links to important information
 of the project.
 
 When a client wants to use this services, the server must be running with the 
-gradle jettyEclipseRun option.
+gradle jettyEclipseRun option on the port 8080.

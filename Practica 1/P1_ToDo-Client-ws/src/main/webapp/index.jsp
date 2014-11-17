@@ -90,9 +90,19 @@
 			<%
 				ToDoServicesService tdss = new ToDoServicesService();
 				ToDoServices tds = tdss.getToDoServicesPort();
-				String list = tds.listTasks();
+				TaskList list = tds.listTasks();
+				String lista = "";
+				if (list != null && !list.getTaskList().isEmpty()){
+					for (Task task: list.getTaskList()) {
+						lista = lista + "<br><br>Number: "+ task.getId() +
+							"<br>Task: " + task.getName() + 
+							"<br>Context: " + task.getContext() +
+							"<br>Project: " + task.getProject() +
+							"<br>Priority: " + task.getPriority();
+					}
+				}
 			%>
-			<%=list%>
+			<%=lista%>
 		</fieldset>
 	</section>
 </body>

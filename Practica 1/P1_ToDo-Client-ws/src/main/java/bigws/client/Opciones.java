@@ -1,6 +1,7 @@
 package bigws.client;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bigws.server.Task;
+import bigws.server.TaskList;
 import bigws.server.ToDoServices;
 import bigws.server.ToDoServicesService;
 
@@ -47,7 +50,25 @@ public class Opciones extends HttpServlet {
 			if(!prioridad.equals("") && prioridad != null)
 				prio = Integer.parseInt(prioridad);
 			
-			tds.addTask(nombre, contexto, proyecto, prio);
+			Task task = new Task();
+			TaskList tL = tds.listTasks();
+			if(tL != null){
+				List<Task> tl = tL.getTaskList();
+				if(!tl.isEmpty())
+					task.setId(tl.get(tl.size()-1).getId()+1);
+				else
+					task.setId(1);
+			}
+			else{
+				task.setId(1);
+			}
+			
+			task.setName(nombre);
+			task.setContext(contexto);
+			task.setProject(proyecto);
+			task.setPriority(prio);
+			tds.addTask(task);
+			
 			response.sendRedirect("index.jsp");
 		} else if (opcion.equals("remove")) {
 			String id = request.getParameter("id");

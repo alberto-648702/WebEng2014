@@ -14,5 +14,5 @@ Also, this folder contains another with the web.xml file.
 Folder wsdl contains the neccesary specifications to connect with the SOAP server, 
 all the locations and the definitions of the messages.
 
-We can use this webapp with the gradle jettyEclipseRun option, but first the server
-must be running.
+We can use this webapp with the gradle jettyEclipseRun option on the port 8081, but first the server
+must be running on the port 8080.
